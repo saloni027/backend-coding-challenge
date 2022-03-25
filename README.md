@@ -23,7 +23,7 @@ For using the api, follow the below steps:
     3) Do the migrations -->               python manage.py migrate 
     4) Run the server -->                 python manage.py runserver
     
-The api requires authentication for any operation by the User.
+The api requires authentication by the User for any operation on notes .
 ## API Reference
 
 #### Register as a new User and get the token.
