@@ -1,40 +1,111 @@
-# Backend Coding Challenge
 
-We appreciate you taking the time to participate and submit a coding challenge. In the next step we would like you to
-create/extend a backend REST API for a simple note-taking app. Below you will find a list of tasks and limitations
-required for completing the challenge. Select your tech stack from the table below and fork the repository. If you don't see you tech stack no worries, you will then need to create your repository from scratch.
+# note-taking Django API
 
-### Application:
+This is a backend django API for note-taking app.
 
-* Users can add, delete and modify their notes
-* Users can see a list of all their notes
-* Users can filter their notes via tags
-* Users must be logged in, in order to view/add/delete/etc. their notes
 
-### The notes are plain text and should contain:
 
-* Title
-* Body
-* Tags
 
-### Optional Features 🚀
 
-* [ ] Search contents of notes with keywords
-* [ ] Notes can be either public or private
-    * Public notes can be viewed without authentication, however they cannot be modified
-* [ ] User management API to create new users
+## Overview
+A note is having a title, body and tags. Each note can have multiple tags attched to it.
 
-### Limitations:
+The api has the functionalities for users to:
 
-* test accordingly
+    1) add, edit and delete their notes
+    2) filter their notes by tag name
+    3) search the note content by keywords
 
-### What if I don't finish?
+For using the api, follow the below steps:
 
-Try to produce something that is at least minimally functional. Part of the exercise is to see what you prioritize first when you have a limited amount of time. For any unfinished tasks, please do add `TODO` comments to your code with a short explanation. You will be given an opportunity later to go into more detail and explain how you would go about finishing those tasks.
+    1) Clone the repository -->           git clone https://github.com/saloni027/backend-coding-challenge.git
+    2) Install the requirements.txt -->   pip install -r requirements.txt
+    3) Do the migrations -->               python manage.py migrate | python manage.py makemigrations 
+    4) Run the server -->                 python manage.py runserver
+    
+The api requires authentication for any operation by the User.
+## API Reference
 
-## Repositories
+#### Register as a new User and get the token.
 
-| Tech Stack | CI Integration | Challenge |
-|--|--|--|
-| Python & Django | Yes | [Repository →](https://github.com/Thermondo/backend-coding-challenge-django) 
-| Kotlin & Ktor | Yes | [Repository →](https://github.com/Thermondo/backend-coding-challenge-ktor)
+```http
+  POST account/register/
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `username` | `string` | username |
+| `password` | `string` | password  |
+| `password2` | `string` | confirm password |
+
+#### if you are a registered person, you can login with this endpoint and get the token.
+
+```http
+  POST /account/login/
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `username` | `string` | username |
+| `password` | `string` | password  |
+
+#### if you are logged in, you can logout with below endpoint. It will require a token.
+
+```http
+  POST /account/logout/ 
+```
+
+#### Get the list of notes. Make sure to add the token in the Headers.
+
+```http
+  GET /notes
+```
+
+#### Get a single note. Make sure to add the token in the Headers.
+
+```http
+  GET /notes/<id>
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of note to fetch |
+
+#### Post notes. Make sure to add the token in the Headers.
+
+```http
+  POST notes/
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `title` | `string` | title of note |
+| `body` | `string` | body of note  |
+| `tags` | `list` | list of dictionaries containing tag_titles |
+
+#### Modify notes. Make sure to add the token in the Headers.
+
+```http
+  PUT notes/<id>
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `title` | `string` | title of note |
+| `body` | `string` | body of note  |
+| `tags` | `list` | list of dictionaries containing tag_titles |
+
+#### Delete notes. Make sure to add the token in the Headers.
+
+```http
+  DELETE notes/<id>
+```
+
+TODO: Add feature to make Notes public or private.
+Public notes can be viewed without authentication, however they cannot be modified
+
+
+
+
+
+
