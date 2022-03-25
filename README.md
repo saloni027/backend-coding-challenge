@@ -20,7 +20,7 @@ For using the api, follow the below steps:
 
     1) Clone the repository -->           git clone https://github.com/saloni027/backend-coding-challenge.git
     2) Create virtual env and install the requirements.txt -->   python3 -m venv venv | pip install -r requirements.txt
-    3) Do the migrations -->               python manage.py migrate | python manage.py makemigrations 
+    3) Do the migrations -->               python manage.py migrate 
     4) Run the server -->                 python manage.py runserver
     
 The api requires authentication for any operation by the User.
