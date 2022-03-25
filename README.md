@@ -9,6 +9,7 @@ This is a backend django API for note-taking app.
 
 ## Overview
 A note is having a title, body and tags. Each note can have multiple tags attched to it.
+Each tag is having a tag_title.
 
 The api has the functionalities for users to:
 
@@ -91,6 +92,7 @@ The api requires authentication for any operation by the User.
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
+| `id` | `string` | id of note to modify |
 | `title` | `string` | title of note |
 | `body` | `string` | body of note  |
 | `tags` | `list` | list of dictionaries containing tag_titles |
@@ -100,6 +102,79 @@ The api requires authentication for any operation by the User.
 ```http
   DELETE notes/<id>
 ```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of note to delete |
+
+#### Get the list of tags.
+```http
+  GET /tags
+```
+
+#### Get a single tag. 
+
+```http
+  GET /tags/<id>
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of tag to fetch |
+
+#### Post tags. 
+
+```http
+  POST tags/
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `tag_title` | `string` | title of the tag |
+
+#### Modify tags.
+
+```http
+  PUT tags/<id>
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `string` | id of tag to modify |
+| `tag_title` | `string` | title of tag |
+
+
+#### Delete tags. 
+
+```http
+  DELETE tags/<id>
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of tag to delete |
+
+#### Filter notes by tags. Authentication Token required.
+
+```http
+  GET /notes?tags=<tag_title>
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `tags`      | `string` | tag_title required |
+
+
+#### Filter notes content by keyword. Authentication Token required.
+
+```http
+  GET /notes?keyword=<keyword>
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `keyword`      | `string` | keyword to search the note content |
+
 
 TODO: Add feature to make Notes public or private.
 Public notes can be viewed without authentication, however they cannot be modified
